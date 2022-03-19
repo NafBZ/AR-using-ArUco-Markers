@@ -1,26 +1,3 @@
-/*
- * Copyright (c) 2019 Flight Dynamics and Control Lab
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- *
- */
-
 #include <iostream>
 #include <opencv2/aruco.hpp>
 #include <opencv2/core.hpp>
@@ -33,12 +10,7 @@ namespace
 {
     const char *about = "Draw cube on ArUco marker images";
     const char *keys =
-        "{d        |16    | dictionary: DICT_4X4_50=0, DICT_4X4_100=1, "
-        "DICT_4X4_250=2, DICT_4X4_1000=3, DICT_5X5_50=4, DICT_5X5_100=5, "
-        "DICT_5X5_250=6, DICT_5X5_1000=7, DICT_6X6_50=8, DICT_6X6_100=9, "
-        "DICT_6X6_250=10, DICT_6X6_1000=11, DICT_7X7_50=12, DICT_7X7_100=13, "
-        "DICT_7X7_250=14, DICT_7X7_1000=15, DICT_ARUCO_ORIGINAL = 16}"
-        "{h        |false | Print help }"
+        "{d        |16    | dictionary: DICT_ARUCO_ORIGINAL = 16}"
         "{l        |      | Actual marker length in meter }"
         "{v        |<none>| Custom video source, otherwise '0' }";
 }
@@ -59,12 +31,6 @@ int main(int argc, char **argv)
         return 1;
     }
 
-    if (parser.get<bool>("h"))
-    {
-        parser.printMessage();
-        return 0;
-    }
-
     int dictionaryId = parser.get<int>("d");
     float marker_length_m = parser.get<float>("l");
     int wait_time = 10;
@@ -78,36 +44,7 @@ int main(int argc, char **argv)
 
     cv::String videoInput = "0";
     cv::VideoCapture in_video;
-    if (parser.has("v"))
-    {
-        videoInput = parser.get<cv::String>("v");
-        if (videoInput.empty())
-        {
-            parser.printMessage();
-            return 1;
-        }
-        char *end = nullptr;
-        int source = static_cast<int>(std::strtol(videoInput.c_str(), &end,
-                                                  10));
-        if (!end || end == videoInput.c_str())
-        {
-            in_video.open(videoInput); // url
-        }
-        else
-        {
-            in_video.open(source); // id
-        }
-    }
-    else
-    {
-        in_video.open(0);
-    }
-
-    if (!parser.check())
-    {
-        parser.printErrors();
-        return 1;
-    }
+    in_video.open(0);
 
     if (!in_video.isOpened())
     {
@@ -138,7 +75,7 @@ int main(int argc, char **argv)
     int fps = 30;
     int fourcc = cv::VideoWriter::fourcc('M', 'J', 'P', 'G');
     cv::VideoWriter video(
-        "out.avi", fourcc, fps, cv::Size(frame_width, frame_height), true);
+        "draw_cube.avi", fourcc, fps, cv::Size(frame_width, frame_height), true);
 
     while (in_video.grab())
     {
