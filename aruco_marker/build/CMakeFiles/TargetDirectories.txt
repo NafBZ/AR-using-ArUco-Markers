@@ -1,0 +1,4 @@
+/home/nafees/IFRoS/Perception/Lab 1_cmake/aruco_marker/build/CMakeFiles/rebuild_cache.dir
+/home/nafees/IFRoS/Perception/Lab 1_cmake/aruco_marker/build/CMakeFiles/edit_cache.dir
+/home/nafees/IFRoS/Perception/Lab 1_cmake/aruco_marker/build/CMakeFiles/generate_board.dir
+/home/nafees/IFRoS/Perception/Lab 1_cmake/aruco_marker/build/CMakeFiles/generate_marker.dir

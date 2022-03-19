@@ -1,0 +1,3 @@
+/home/nafees/IFRoS/Perception/Lab 1_cmake/detect_marker/build/CMakeFiles/rebuild_cache.dir
+/home/nafees/IFRoS/Perception/Lab 1_cmake/detect_marker/build/CMakeFiles/edit_cache.dir
+/home/nafees/IFRoS/Perception/Lab 1_cmake/detect_marker/build/CMakeFiles/detect_marker.dir
