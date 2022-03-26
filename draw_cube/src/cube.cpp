@@ -8,7 +8,6 @@
 
 namespace
 {
-    const char *about = "Draw cube on ArUco marker images";
     const char *keys =
         "{d        |16    | dictionary: DICT_ARUCO_ORIGINAL = 16}"
         "{l        |      | Actual marker length in meter }"
@@ -23,7 +22,6 @@ void drawCubeWireframe(
 int main(int argc, char **argv)
 {
     cv::CommandLineParser parser(argc, argv, keys);
-    parser.about(about);
 
     if (argc < 2)
     {
@@ -57,8 +55,7 @@ int main(int argc, char **argv)
     std::ostringstream vector_to_marker;
 
     cv::Ptr<cv::aruco::Dictionary> dictionary =
-        cv::aruco::getPredefinedDictionary(
-            cv::aruco::PREDEFINED_DICTIONARY_NAME(dictionaryId));
+        cv::aruco::getPredefinedDictionary(dictionaryId);
 
     cv::FileStorage fs("../../calibration_params.yml", cv::FileStorage::READ);
 
@@ -102,11 +99,6 @@ int main(int argc, char **argv)
                     image_copy, camera_matrix, dist_coeffs, rvecs[i], tvecs[i],
                     marker_length_m);
 
-                // This section is going to print the data for all the detected
-                // markers. If you have more than a single marker, it is
-                // recommended to change the below section so that either you
-                // only print the data for a specific marker, or you print the
-                // data for each marker separately.
                 vector_to_marker.str(std::string());
                 vector_to_marker << std::setprecision(4)
                                  << "x: " << std::setw(8) << tvecs[0](0);
