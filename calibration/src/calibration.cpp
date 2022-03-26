@@ -1,5 +1,3 @@
-
-
 #include <opencv2/highgui.hpp>
 #include <opencv2/calib3d.hpp>
 #include <opencv2/aruco.hpp>
@@ -13,11 +11,6 @@ using namespace cv;
 
 namespace
 {
-    const char *about =
-        "Calibration using a ArUco Planar Grid board\n"
-        "  To capture a frame for calibration, press 'c',\n"
-        "  If input comes from video, press any key for next frame\n"
-        "  To finish capturing, press 'ESC' key and calibration starts.\n";
     const char *keys =
         "{w        |       | Number of squares in X direction }"
         "{h        |       | Number of squares in Y direction }"
@@ -30,8 +23,6 @@ namespace
         "{waitkey  | 10    | Time in milliseconds to wait for key press }";
 }
 
-/**
- */
 static bool readDetectorParameters(string filename, Ptr<aruco::DetectorParameters> &params)
 {
     FileStorage fs(filename, FileStorage::READ);
@@ -60,8 +51,6 @@ static bool readDetectorParameters(string filename, Ptr<aruco::DetectorParameter
     return true;
 }
 
-/**
- */
 static bool saveCameraParams(const string &filename, Size imageSize, float aspectRatio, int flags,
                              const Mat &cameraMatrix, const Mat &distCoeffs, double totalAvgErr)
 {
@@ -102,12 +91,9 @@ static bool saveCameraParams(const string &filename, Size imageSize, float aspec
     return true;
 }
 
-/**
- */
 int main(int argc, char *argv[])
 {
     CommandLineParser parser(argc, argv, keys);
-    parser.about(about);
 
     if (argc < 6)
     {
@@ -186,13 +172,13 @@ int main(int argc, char *argv[])
         putText(imageCopy, "Press 'c' to add current frame. 'ESC' to finish and calibrate",
                 Point(10, 20), FONT_HERSHEY_SIMPLEX, 0.5, Scalar(255, 0, 0), 2);
 
-        imshow("out", imageCopy);
+        imshow("Output", imageCopy);
         char key = (char)waitKey(waitTime);
         if (key == 27)
             break;
         if (key == 'c' && ids.size() > 0)
         {
-            cout << "Frame captured" << endl;
+            cout << "Frame Captured" << endl;
             allCorners.push_back(corners);
             allIds.push_back(ids);
             imgSize = image.size();
