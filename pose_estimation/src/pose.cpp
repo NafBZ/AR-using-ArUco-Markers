@@ -10,7 +10,6 @@ namespace
         "{l        |      | Actual marker length in meter }"
         "{v        |<none>| Custom video source, otherwise '0' }"
         "{h        |false | Print help }"
-        "{l        |      | Actual marker length in meter }"
         "{v        |<none>| Custom video source, otherwise '0' }";
 }
 
