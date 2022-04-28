@@ -2,11 +2,6 @@
 
 ### Lab : ArUco Markers
 
-**Group Members:**
-1. Nafees Bin Zaman - u1977526
-2. Rawnak Mahmuda Jahan - u1877525
-
-
 &nbsp;
 *To generate ArUco Marker and ArUco Board, please execute the follwing commands*
 
